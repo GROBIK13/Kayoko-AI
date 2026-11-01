@@ -6,6 +6,12 @@ const welcome = document.getElementById("welcome");
 const kayoko = document.getElementById("kayoko");
 const mood = document.getElementById("mood");
 
+const STORAGE_KEY = "kayokoChatHistory";
+
+let chatHistory = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "[]"
+);
+
 function setMood(state) {
   const images = {
     idle: "images/kayoko-idle.png",
@@ -23,7 +29,14 @@ function setMood(state) {
   mood.textContent = labels[state];
 }
 
-function addMessage(text, type) {
+function saveHistory() {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(chatHistory)
+  );
+}
+
+function addMessage(text, type, save = true) {
   const message = document.createElement("div");
 
   message.className = `message ${type}`;
@@ -31,30 +44,47 @@ function addMessage(text, type) {
 
   messages.appendChild(message);
   messages.scrollTop = messages.scrollHeight;
+
+  if (save) {
+    chatHistory.push({ text, type });
+    saveHistory();
+  }
+}
+
+function loadHistory() {
+  messages.replaceChildren();
+
+  if (chatHistory.length === 0) {
+    welcome.style.display = "block";
+    return;
+  }
+
+  welcome.style.display = "none";
+
+  chatHistory.forEach(item => {
+    addMessage(item.text, item.type, false);
+  });
 }
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const text = promptBox.value.trim();
-
   if (!text) return;
 
   welcome.style.display = "none";
 
   addMessage(text, "user");
-
   promptBox.value = "";
 
   setMood("thinking");
 
-  // Временный демонстрационный ответ.
   await new Promise(resolve => setTimeout(resolve, 1200));
 
   setMood("speaking");
 
   addMessage(
-    "Я получила твоё сообщение! 🌸 Сейчас я работаю в демонстрационном режиме. Скоро подключим настоящий интеллект, и я смогу помогать тебе с программированием и разработкой игр.",
+    "Я получила твоё сообщение! 🌸 Пока я работаю в демонстрационном режиме. Моя история переписки уже сохраняется!",
     "assistant"
   );
 
@@ -62,32 +92,27 @@ form.addEventListener("submit", async (event) => {
 });
 
 document.getElementById("newChat").addEventListener("click", () => {
+  chatHistory = [];
+  saveHistory();
+
   messages.replaceChildren();
-
   welcome.style.display = "block";
-
   promptBox.value = "";
 
   setMood("idle");
 });
 
 document.getElementById("projects").addEventListener("click", () => {
-  addMessage(
-    "Раздел проектов появится в следующей версии.",
-    "assistant"
-  );
+  addMessage("Раздел проектов появится в следующей версии.", "assistant");
 });
 
 document.getElementById("images").addEventListener("click", () => {
-  addMessage(
-    "Генератор изображений пока не подключён.",
-    "assistant"
-  );
+  addMessage("Генератор изображений пока не подключён.", "assistant");
 });
 
 document.getElementById("settings").addEventListener("click", () => {
-  addMessage(
-    "Настройки Kayoko AI появятся в следующей версии.",
-    "assistant"
-  );
+  addMessage("Настройки Kayoko AI появятся в следующей версии.", "assistant");
 });
+
+loadHistory();
+setMood("idle");
