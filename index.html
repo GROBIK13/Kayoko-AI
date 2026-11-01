@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayoko AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <h2>🌸 Kayoko AI</h2>
+    <button id="newChat">＋ Новый чат</button>
+
+    <nav>
+      <button class="nav-item active">💬 Чат</button>
+      <button class="nav-item" id="projects">📁 Проекты</button>
+      <button class="nav-item" id="images">🎨 Изображения</button>
+      <button class="nav-item" id="settings">⚙ Настройки</button>
+    </nav>
+
+    <div class="sidebar-footer">Kayoko AI v0.1</div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <span>Личный AI-помощник</span>
+      <span class="online">● Онлайн</span>
+    </header>
+
+    <section class="workspace">
+
+      <div class="character-panel">
+        <img
+          id="kayoko"
+          src="images/kayoko-idle.png"
+          alt="Каёко"
+        >
+
+        <h3>Судзуко Каёко</h3>
+        <p id="mood">Ожидает сообщения</p>
+      </div>
+
+      <div class="chat-panel">
+
+        <div class="welcome" id="welcome">
+          <h1>Привет! Я Каёко 🌸</h1>
+          <p>
+            Я могу помогать тебе создавать игры,
+            писать код и придумывать новые проекты.
+          </p>
+        </div>
+
+        <div id="messages" class="messages"></div>
+
+        <form id="chatForm">
+          <textarea
+            id="prompt"
+            placeholder="Напиши Каёко сообщение..."
+            rows="1"
+          ></textarea>
+
+          <button type="submit">➤</button>
+        </form>
+
+        <p class="notice">
+          Kayoko AI — персональный помощник разработчика.
+        </p>
+
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
