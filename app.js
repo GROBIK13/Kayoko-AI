@@ -66,6 +66,7 @@ function loadHistory() {
   });
 }
 
+// Отправка сообщений
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -79,21 +80,31 @@ form.addEventListener("submit", async (event) => {
 
   setMood("thinking");
 
-  await new Promise(resolve => setTimeout(resolve, 1200));
+  await new Promise(resolve => setTimeout(resolve, 700));
 
   setMood("speaking");
 
-  addMessage(
-    "Я получила твоё сообщение! 🌸 Пока я работаю в демонстрационном режиме. Моя история переписки уже сохраняется!",
-    "assistant"
-  );
+  let answer;
+
+  if (window.KOJOKOAI) {
+    answer = window.KOJOKOAI.respond(text);
+  } else {
+    answer = "Ой! Мой мозг пока не подключён! 🌸";
+  }
+
+  addMessage(answer, "assistant");
 
   setMood("idle");
 });
 
+// Новый чат
 document.getElementById("newChat").addEventListener("click", () => {
   chatHistory = [];
   saveHistory();
+
+  if (window.KOJOKOAI) {
+    window.KOJOKOAI.resetMemory();
+  }
 
   messages.replaceChildren();
   welcome.style.display = "block";
@@ -102,17 +113,28 @@ document.getElementById("newChat").addEventListener("click", () => {
   setMood("idle");
 });
 
+// Разделы
 document.getElementById("projects").addEventListener("click", () => {
-  addMessage("Раздел проектов появится в следующей версии.", "assistant");
+  addMessage(
+    "Раздел проектов появится в следующей версии! 🌸",
+    "assistant"
+  );
 });
 
 document.getElementById("images").addEventListener("click", () => {
-  addMessage("Генератор изображений пока не подключён.", "assistant");
+  addMessage(
+    "Ня! Генератор изображений пока находится в разработке! 🎨",
+    "assistant"
+  );
 });
 
 document.getElementById("settings").addEventListener("click", () => {
-  addMessage("Настройки Kayoko AI появятся в следующей версии.", "assistant");
+  addMessage(
+    "Настройки KOJOKO AI скоро появятся! ⚙️",
+    "assistant"
+  );
 });
 
+// Запуск
 loadHistory();
 setMood("idle");
