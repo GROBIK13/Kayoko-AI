@@ -5,8 +5,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  color: #f5f1fa;
-  background: #171522;
+  color: #eeeeF5;
+  background: #34373e;
 }
 
 button, textarea {
@@ -19,8 +19,10 @@ button, textarea {
   min-height: 100vh;
 }
 
+/* Боковая панель */
+
 .sidebar {
-  background: #111019;
+  background: #292c33;
   padding: 25px 18px;
   border-right: 1px solid #ffffff15;
   display: flex;
@@ -38,19 +40,26 @@ button, textarea {
   border-radius: 10px;
   cursor: pointer;
   color: white;
-  background: #292536;
+  background: #41454e;
   text-align: left;
+  transition: background 0.2s;
+}
+
+.sidebar button:hover {
+  background: #515663;
 }
 
 .nav-item.active {
-  background: #785e9f;
+  background: #514266;
 }
 
 .sidebar-footer {
   margin-top: auto;
-  color: #898397;
+  color: #a5a8b0;
   font-size: 12px;
 }
+
+/* Основная область */
 
 .main {
   min-width: 0;
@@ -59,6 +68,7 @@ button, textarea {
 .topbar {
   height: 65px;
   padding: 20px 30px;
+  background: #30333a;
   border-bottom: 1px solid #ffffff15;
   display: flex;
   justify-content: space-between;
@@ -69,6 +79,8 @@ button, textarea {
   font-size: 13px;
 }
 
+/* Рабочая область */
+
 .workspace {
   display: grid;
   grid-template-columns: 36% 1fr;
@@ -77,8 +89,10 @@ button, textarea {
   min-height: calc(100vh - 65px);
 }
 
+/* Персонаж */
+
 .character-panel {
-  background: #292438;
+  background: #41444d;
   border-radius: 20px;
   padding: 20px;
   text-align: center;
@@ -102,12 +116,14 @@ button, textarea {
 }
 
 .character-panel p {
-  color: #c5b5d8;
+  color: #c1c3ce;
   font-size: 13px;
 }
 
+/* Чат */
+
 .chat-panel {
-  background: #201e2b;
+  background: #3b3e46;
   border-radius: 20px;
   padding: 25px;
   display: flex;
@@ -122,7 +138,7 @@ button, textarea {
 }
 
 .welcome p {
-  color: #aaa4b5;
+  color: #c0c2ca;
   line-height: 1.6;
 }
 
@@ -135,6 +151,8 @@ button, textarea {
   padding: 15px 0;
 }
 
+/* Сообщения */
+
 .message {
   max-width: 85%;
   padding: 12px 15px;
@@ -145,20 +163,26 @@ button, textarea {
 
 .user {
   align-self: flex-end;
-  background: #785e9f;
+  background: #555a65;
+  border: 1px solid #747985;
+  color: #ffffff;
 }
 
 .assistant {
   align-self: flex-start;
-  background: #343140;
+  background: #382c4c;
+  border: 1px solid #67517f;
+  color: #f5edff;
 }
+
+/* Поле ввода */
 
 #chatForm {
   display: flex;
   gap: 10px;
   padding: 10px;
-  background: #111019;
-  border: 1px solid #ffffff20;
+  background: #292c33;
+  border: 1px solid #ffffff25;
   border-radius: 15px;
 }
 
@@ -173,21 +197,33 @@ button, textarea {
   min-width: 0;
 }
 
+#prompt::placeholder {
+  color: #a7aab4;
+}
+
 #chatForm button {
   width: 45px;
   border: 0;
   border-radius: 10px;
-  background: #b69bdc;
+  background: #62517b;
+  color: white;
   cursor: pointer;
   font-size: 20px;
+  transition: background 0.2s;
+}
+
+#chatForm button:hover {
+  background: #796397;
 }
 
 .notice {
-  color: #777184;
+  color: #a2a5ae;
   text-align: center;
   font-size: 11px;
   margin-top: 15px;
 }
+
+/* Мобильная версия */
 
 @media (max-width: 800px) {
   .app {
