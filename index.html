@@ -3,77 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kayoko AI</title>
+  <meta name="theme-color" content="#252B3A">
+  <title>KOJOKO AI — Каёко</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <aside class="sidebar">
-    <h2>🌸 Kayoko AI</h2>
-    <button id="newChat">＋ Новый чат</button>
-
-    <nav>
-      <button class="nav-item active">💬 Чат</button>
-      <button class="nav-item" id="projects">📁 Проекты</button>
-      <button class="nav-item" id="images">🎨 Изображения</button>
-      <button class="nav-item" id="settings">⚙ Настройки</button>
-    </nav>
-
-    <div class="sidebar-footer">Kayoko AI v0.1</div>
-  </aside>
-
-  <main class="main">
-
-    <header class="topbar">
-      <span>Личный AI-помощник</span>
-      <span class="online">● Онлайн</span>
-    </header>
-
-    <section class="workspace">
-
-      <div class="character-panel">
-        <img
-          id="kayoko"
-          src="images/kayoko-idle.png"
-          alt="Каёко"
-        >
-
-        <h3>Судзуко Каёко</h3>
-        <p id="mood">Ожидает сообщения</p>
+    <!-- Боковая панель -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="brand-icon">🌸</span>
+          <span>KOJOKO AI</span>
+        </div>
+        <span class="version">v0.2</span>
       </div>
 
-      <div class="chat-panel">
+      <button class="new-chat-btn" id="newChatBtn">
+        <span>＋</span> Новый чат
+      </button>
 
+      <div class="history-section">
+        <div class="section-title">ИСТОРИЯ ЧАТОВ</div>
+        <div id="chatHistory" class="chat-history"></div>
+      </div>
+
+      <div class="sidebar-nav">
+        <button class="nav-btn" id="projectsBtn">
+          <span>📁</span> Проекты
+        </button>
+        <button class="nav-btn" id="imagesBtn">
+          <span>🖼️</span> Изображения
+        </button>
+        <button class="nav-btn" id="settingsBtn">
+          <span>⚙️</span> Настройки
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="profile-icon">K</div>
+        <div class="profile-info">
+          <strong>Каёко</strong>
+          <small>Твой AI-помощник</small>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Основная область -->
+    <main class="main">
+
+      <header class="topbar">
+        <div class="chat-title" id="chatTitle">Новый чат</div>
+
+        <div class="kayoko-status">
+          <div class="status-text">
+            <strong>Каёко</strong>
+            <small id="mood">Ожидаю сообщения...</small>
+          </div>
+          <img
+            src="images/kayoko-idle.jpg"
+            id="kayoko"
+            class="kayoko-avatar"
+            alt="Каёко"
+          >
+        </div>
+      </header>
+
+      <section class="chat-area" id="chatArea">
         <div class="welcome" id="welcome">
-          <h1>Привет! Я Каёко 🌸</h1>
-          <p>
-            Я могу помогать тебе создавать игры,
-            писать код и придумывать новые проекты.
-          </p>
+          <div class="welcome-icon">🌸</div>
+          <h1>Привет! Я Каёко.</h1>
+          <p>Чем я могу тебе помочь сегодня?</p>
+
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="Помоги написать простой код">
+              💻 Помоги с кодом
+            </button>
+            <button class="suggestion" data-prompt="Помоги решить школьное задание">
+              📚 Решить задание
+            </button>
+            <button class="suggestion" data-prompt="Давай просто поговорим">
+              💬 Поговорить
+            </button>
+          </div>
         </div>
 
         <div id="messages" class="messages"></div>
+      </section>
 
+      <footer class="composer">
         <form id="chatForm">
           <textarea
             id="prompt"
-            placeholder="Напиши Каёко сообщение..."
+            placeholder="Напиши сообщение Каёко..."
             rows="1"
           ></textarea>
 
-          <button type="submit">➤</button>
+          <button type="submit" id="sendBtn" aria-label="Отправить">
+            ➤
+          </button>
         </form>
 
-        <p class="notice">
-          Kayoko AI — персональный помощник.
-        </p>
+        <div class="composer-note">
+          KOJOKO AI может иногда ошибаться. Проверяй важную информацию.
+        </div>
+      </footer>
 
-      </div>
-    </section>
-  </main>
-<script src="brain.js"></script>
-<script src="app.js"></script>
+    </main>
+  </div>
+
+  <!-- Кнопка открытия и закрытия боковой панели -->
+  <button id="toggleSidebar" class="sidebar-toggle" aria-label="Свернуть меню">
+    ‹
+  </button>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="brain.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
